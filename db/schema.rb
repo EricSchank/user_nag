@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151023181114) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "site_configs", force: :cascade do |t|
     t.integer  "site_id",    null: false
     t.string   "nag"
