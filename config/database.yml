@@ -6,7 +6,7 @@
 #
 default: &default
   adapter: postgresql
-  pool: 5
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
   timeout: 5000
   encoding: unicode
 
@@ -24,3 +24,4 @@ test:
 production:
   <<: *default
   database: user_nag_production
+  url: <%= ENV["DATABASE_URL"] %>
