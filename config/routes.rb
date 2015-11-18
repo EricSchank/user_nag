@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'home' => 'home#index'
   post 'home/nag' => 'home#nag'
+  get 'ticket' => 'ticket#index'
+  post 'ticket/nag' => 'ticket#nag'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

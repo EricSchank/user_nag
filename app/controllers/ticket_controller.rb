@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class TicketController < ApplicationController
   before_filter :load_site
   after_filter :allow_iframe
 

@@ -1,22 +1,8 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-//= require materialize-sprockets
-
 window.UserNag = {
   ticketsNagged: [],
-  nag: function(){
-    var card = new SW.Card();
-    card.services('helpdesk').request('tickets', {status: 'open'}).then(function(t){
-      var ticketList = t['tickets'];
-      for(var i=0; i < ticketList.length; i++){
-        var tick = ticketList[i];
-        if(tick['status'] == 'waiting') {
-          this.nagTicket(tick['id']);
-        }
-      }
-    });
-  },
   nagTicket: function(ticketId){
     card.services('helpdesk').request('comment:create', ticketId, {
       public: true,
@@ -27,8 +13,10 @@ window.UserNag = {
 $('document').ready(function(){
   var card = new SW.Card();
   card.onActivate(function(envData){
+    UserNag.env = envData;
     $('#auid').val(envData['app_host']['auid']);
     UserNag.site = envData['app_host']['auid'];
   });
+  card.services('helpdesk').on('showTicket', UserNag.nagTicket);
   $('#send_nags').on('click', window.UserNag.nag);
 });
