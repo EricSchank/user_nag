@@ -11,3 +11,19 @@ $primary-color: color("blue", "lighten-2") !default;
     margin-left: 5px;
   }
 }
+
+#toast-container {
+  @media #{$medium-only} {
+    min-width: 8%;
+    top: 10%;
+    right: 7%;
+    left: 7%;
+    bottom: auto;
+  }
+}
+
+.toast {
+  @media #{$medium-only} {
+    float: right;
+  }
+}

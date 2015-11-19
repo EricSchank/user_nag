@@ -13,8 +13,10 @@ window.UserNag = {
         var tick = ticketList[i];
         if(tick['status'] == 'waiting') {
           UserNag.nagTicket(tick['id']);
+          UserNag.ticketsNagged.push(tick['id']);
         }
       }
+      Materialize.toast('' + UserNag.ticketsNagged.length + ' tickets nagged.', 3000);
     });
   },
   nagTicket: function(ticketId){

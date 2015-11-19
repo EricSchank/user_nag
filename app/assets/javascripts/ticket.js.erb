@@ -7,6 +7,7 @@ window.TicketNag = {
   nag: function() {
     if(TicketNag.ticketId) {
       TicketNag.nagTicket(TicketNag.ticketId);
+      Materialize.toast('Ticket nagged.', 3000);
     }
   },
   nagTicket: function(ticketId) {
