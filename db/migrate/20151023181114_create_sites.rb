@@ -3,6 +3,7 @@ class CreateSites < ActiveRecord::Migration
     create_table :sites do |t|
       t.string :auid, null: false
       t.timestamps null: false
+      t.index :auid
     end
   end
 end

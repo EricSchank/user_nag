@@ -17,16 +17,20 @@ ActiveRecord::Schema.define(version: 20151023181114) do
   enable_extension "plpgsql"
 
   create_table "site_configs", force: :cascade do |t|
-    t.integer  "site_id",    null: false
-    t.string   "nag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "site_id",                 null: false
+    t.string   "nag",        limit: 5000
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  add_index "site_configs", ["site_id"], name: "index_site_configs_on_site_id", using: :btree
 
   create_table "sites", force: :cascade do |t|
     t.string   "auid",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "sites", ["auid"], name: "index_sites_on_auid", using: :btree
 
 end
