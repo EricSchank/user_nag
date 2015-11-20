@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120142053) do
+ActiveRecord::Schema.define(version: 20151120143237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "nag_histories", force: :cascade do |t|
+    t.integer  "site_id",                         null: false
+    t.integer  "action_id",                       null: false
+    t.integer  "ticket_id",                       null: false
+    t.boolean  "ticket_specific", default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "nag_histories", ["site_id", "action_id"], name: "index_nag_histories_on_site_id_and_action_id", using: :btree
+  add_index "nag_histories", ["site_id", "ticket_id"], name: "index_nag_histories_on_site_id_and_ticket_id", using: :btree
+  add_index "nag_histories", ["site_id"], name: "index_nag_histories_on_site_id", using: :btree
 
   create_table "no_nags", force: :cascade do |t|
     t.integer  "site_id",    null: false
@@ -29,10 +42,12 @@ ActiveRecord::Schema.define(version: 20151120142053) do
   add_index "no_nags", ["site_id"], name: "index_no_nags_on_site_id", using: :btree
 
   create_table "site_configs", force: :cascade do |t|
-    t.integer  "site_id",                 null: false
+    t.integer  "site_id",                                 null: false
     t.string   "nag",        limit: 5000
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "max_nags",                default: 99999
+    t.integer  "frequency",               default: 0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   add_index "site_configs", ["site_id"], name: "index_site_configs_on_site_id", using: :btree

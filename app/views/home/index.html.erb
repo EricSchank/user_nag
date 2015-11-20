@@ -1,4 +1,5 @@
 <div class="fullpage">
+  <h4>Nag All "Waiting on User" Tickets</h4>
   <p class="instructions">
     Click below to send a gentle reminder to the users you're waiting on.
     <i class="material-icons tooltipped tiny" data-delay="40" data-tooltip="We remind your users by adding a public comment to each ticket in the 'Waiting on user' state.">info_outline</i>
@@ -6,4 +7,36 @@
   <button id="send_nags" class="waves-effect waves-light btn">
     <i class="material-icons right">email</i> Send Nags
   </button>
+
+  <hr class="space-it"/>
+  <h4>User Nag Settings</h4>
+  <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">chat</i>Nag Text</div>
+      <div class="collapsible-body"><p>Specify the reminder text we should use to nag your users.</p><p>Coming soon...</p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">done_all</i>Nag History</div>
+      <div class="collapsible-body"><p>Coming soon...</p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">portable_wifi_off</i>No Nag List</div>
+      <div class="collapsible-body"><p>These people or tickets won't be nagged.</p><p>Coming soon...</p></div>
+    </li>
+  </ul>
+
+  <hr class="space-it"/>
+  <div class="card teal lighten-3">
+    <div class="card-content">
+      <span class="card-title">User Nag Feedback</span>
+      <p>Let us know what you like or don't like.  And tell us what future features you most want.</p>
+    </div>
+    <div class="card-action">
+      <%= mail_to 'support@spiceworks.com', subject: 'User Nag App Feedback', class: 'white-text' do %>
+        <i class="material-icons">question_answer</i>Email Us
+      <% end %>
+      <a class="white-text" href="#"><i class="material-icons">grade</i>Write a Review</a>
+    </div>
+  </div>
+
 </div>
