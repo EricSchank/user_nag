@@ -21,11 +21,13 @@ ActiveRecord::Schema.define(version: 20151120143237) do
     t.integer  "action_id",                       null: false
     t.integer  "ticket_id",                       null: false
     t.boolean  "ticket_specific", default: false
+    t.integer  "nagging_user_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
 
   add_index "nag_histories", ["site_id", "action_id"], name: "index_nag_histories_on_site_id_and_action_id", using: :btree
+  add_index "nag_histories", ["site_id", "nagging_user_id"], name: "index_nag_histories_on_site_id_and_nagging_user_id", using: :btree
   add_index "nag_histories", ["site_id", "ticket_id"], name: "index_nag_histories_on_site_id_and_ticket_id", using: :btree
   add_index "nag_histories", ["site_id"], name: "index_nag_histories_on_site_id", using: :btree
 
