@@ -11,9 +11,16 @@
   <hr class="space-it"/>
   <h4>User Nag Settings</h4>
   <ul class="collapsible popout" data-collapsible="accordion">
-    <li>
+    <li class="nag-text">
       <div class="collapsible-header"><i class="material-icons">chat</i>Nag Text</div>
-      <div class="collapsible-body"><p>Specify the reminder text we should use to nag your users.</p><p>Coming soon...</p></div>
+      <div class="collapsible-body">
+        <p>Specify the reminder text we should use to nag your users.</p>
+        <p class="input-field">
+          <textarea id="nag_text" readonly class="materialize-textarea">Just a quick reminder that we need a little more info from you on this issue.&#13;&#10;When you get a chance, please give us an update so we can continue to help with this issue.&#13;&#10;Thanks!</textarea>
+          <label for="nag_text">Nag Message</label>
+        </p>
+        <p>Edit ability is coming soon...</p>
+      </div>
     </li>
     <li>
       <div class="collapsible-header"><i class="material-icons">done_all</i>Nag History</div>
@@ -22,6 +29,10 @@
     <li>
       <div class="collapsible-header"><i class="material-icons">portable_wifi_off</i>No Nag List</div>
       <div class="collapsible-body"><p>These people or tickets won't be nagged.</p><p>Coming soon...</p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">pause_circle_outline</i>Auto-Close</div>
+      <div class="collapsible-body"><p>It must not be that important.  Let's close this after one last nag.</p><p>Coming soon...</p></div>
     </li>
   </ul>
 
@@ -35,7 +46,7 @@
       <%= mail_to 'support@spiceworks.com', subject: 'User Nag App Feedback', class: 'white-text' do %>
         <i class="material-icons">question_answer</i>Email Us
       <% end %>
-      <a class="white-text" href="#"><i class="material-icons">grade</i>Write a Review</a>
+      <a class="white-text" href="https://community.spiceworks.com/appcenter/app/extension_43"><i class="material-icons">grade</i>Write a Review</a>
     </div>
   </div>
 
