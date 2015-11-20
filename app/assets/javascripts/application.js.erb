@@ -22,29 +22,36 @@ window.UserNag = {
 
     if(e.data) {
       // Single ticket
-      UserNag.nagTicket(e.data);
-      Materialize.toast('Ticket nagged.', 3000);
+      UserNag.nagTicket(e.data).then(function(){
+          Materialize.toast('Ticket nagged.', 3000);
+      });
     } else {
       // All tickets in "waiting" state
       card.services('helpdesk').request('tickets', {status: 'open'}).then(function(t){
         var ticketList = t['tickets'];
+        var promises = [];
         for(var i=0; i < ticketList.length; i++){
           var tick = ticketList[i];
           if(tick['status'] == 'waiting') {
-            UserNag.nagTicket(tick['id']);
-            UserNag.ticketsNagged.push(tick['id']);
+            promises.push(UserNag.nagTicket(tick['id']));
           }
         }
-        Materialize.toast('' + UserNag.ticketsNagged.length + ' tickets nagged.', 3000);
-        UserNag.ticketsNagged = [];
+        Promise.all(promises).then(function(){
+          Materialize.toast('' + UserNag.ticketsNagged.length + ' tickets successfully nagged.', 4500);
+          UserNag.ticketsNagged = [];
+        });
       });
     }
   },
   nagTicket: function(ticketId){
     var card = new SW.Card();
-    card.services('helpdesk').request('comment:create', ticketId, {
+    return card.services('helpdesk').request('comment:create', ticketId, {
       public: true,
       body: 'Just a quick reminder that we need a little more info from you on this issue.\nWhen you get a chance, please give us an update so we can continue to help with this issue.\nThanks!'
+    }).then(function(d){
+      UserNag.ticketsNagged.push(ticketId);
+    }, function(e){
+      Materialize.toast('Unable to send nag for ticket #' + ticketId + '.', 3000);
     });
   }
 };

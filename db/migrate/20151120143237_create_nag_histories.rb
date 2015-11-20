@@ -5,6 +5,7 @@ class CreateNagHistories < ActiveRecord::Migration
       t.integer :action_id, null: false
       t.integer :ticket_id, null: false
       t.boolean :ticket_specific, default: false
+      t.boolean :successful, default: true
       t.integer :nagging_user_id
       t.timestamps null: false
       t.index :site_id
