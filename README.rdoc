@@ -1,28 +1,15 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A platform app extension for the Spiceworks helpdesk.
 
-Things you may want to cover:
+This app send reminders for your pending tickets with just a single click.
 
-* Ruby version
+Technologies Used:
 
-* System dependencies
+* Spiceworks SDK & API[https://spiceworks.github.io/developers.spiceworks.com/documentation/cloud-apps/]
 
-* Configuration
+* Ruby on Rails[http://rubyonrails.org/] 4.x
 
-* Database creation
+* Materialize-Sass[https://github.com/mkhairi/materialize-sass] gem
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Postgresql[http://www.postgresql.org/]
