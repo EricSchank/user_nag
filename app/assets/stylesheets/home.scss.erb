@@ -19,6 +19,11 @@ $primary-color: color("blue", "lighten-2") !default;
       top: 3.25em;
       left: auto;
     }
+    textarea.materialize-textarea:focus:not([readonly]) ~ label {
+      top: 2.5em;
+      font-size: 1rem;
+    }
+
     textarea {
       border-left: 3px solid color('teal', 'lighten-1');
       padding: 10px 7px;
