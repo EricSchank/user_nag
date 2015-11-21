@@ -6,12 +6,13 @@
 $primary-color: color("blue", "lighten-2") !default;
 @import 'materialize';
 
+.space-it {
+  margin: 40px 0;
+}
+
 .fullpage {
   .instructions i {
     margin-left: 5px;
-  }
-  .space-it {
-    margin: 40px 0;
   }
   .nag-text {
     label {
@@ -25,6 +26,17 @@ $primary-color: color("blue", "lighten-2") !default;
   }
   & > ul.collapsible.popout {
     padding: 0 7px;
+  }
+}
+
+.ticket {
+  .nag-history {
+    h5 > i {
+      margin: 0 5px;
+    }
+    .ticket-id {
+      display: none;
+    }
   }
 }
 

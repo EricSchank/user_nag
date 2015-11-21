@@ -2,7 +2,7 @@ class CreateNagHistories < ActiveRecord::Migration
   def change
     create_table :nag_histories do |t|
       t.integer :site_id, null: false
-      t.integer :action_id, null: false
+      t.string :action_id, null: false
       t.integer :ticket_id, null: false
       t.boolean :ticket_specific, default: false
       t.boolean :successful, default: true

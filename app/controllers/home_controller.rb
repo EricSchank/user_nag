@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   before_filter :load_site
-  after_filter :allow_iframe
 
   def index
   end

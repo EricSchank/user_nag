@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 20151120143237) do
 
   create_table "nag_histories", force: :cascade do |t|
     t.integer  "site_id",                         null: false
-    t.integer  "action_id",                       null: false
+    t.string   "action_id",                       null: false
     t.integer  "ticket_id",                       null: false
     t.boolean  "ticket_specific", default: false
+    t.boolean  "successful",      default: true
     t.integer  "nagging_user_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false

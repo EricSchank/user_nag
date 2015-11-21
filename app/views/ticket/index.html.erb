@@ -6,4 +6,15 @@
   <button id="send_nag" class="waves-effect waves-light btn">
     <i class="material-icons right">email</i> Send Nag
   </button>
+
+  <hr class="space-it"/>
+
+  <div class="nag-history">
+    <h5 class=""><i class="material-icons">done_all</i>Nag History</h5>
+    <div class="">
+      <%= render partial: 'home/nag_history' %>
+    </div>
+  </div>
 </div>
+
+<%= javascript_tag "UserNag.ticketPlacement = true;" %>

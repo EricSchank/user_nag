@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'home/nag' => 'home#nag'
   get 'ticket' => 'ticket#index'
   post 'ticket/nag' => 'ticket#nag'
+  resources :nag_history, only: [:create, :index]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
