@@ -10,7 +10,7 @@ Technologies Used:
 
 * Spiceworks SDK & API[https://spiceworks.github.io/developers.spiceworks.com/documentation/cloud-apps/]
 
-* [Ruby on Rails 4.x](http://rubyonrails.org/)
+* (Ruby on Rails 4.x)[http://rubyonrails.org/]
 
 * Materialize-Sass[https://github.com/mkhairi/materialize-sass] gem
 
