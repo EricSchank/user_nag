@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'home' => 'home#index'
-  post 'home/nag' => 'home#nag'
+  # post 'home/nag' => 'home#nag'
   get 'ticket' => 'ticket#index'
-  post 'ticket/nag' => 'ticket#nag'
+  # post 'ticket/nag' => 'ticket#nag'
   resources :nag_history, only: [:create, :index]
+  resource :nag_text
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

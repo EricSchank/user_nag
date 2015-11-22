@@ -55,7 +55,7 @@ window.UserNag = {
     var card = UserNag.card;
     return card.services('helpdesk').request('comment:create', ticketId, {
       public: true,
-      body: 'Just a quick reminder that we need a little more info from you on this issue.\nWhen you get a chance, please give us an update so we can continue to help with this issue.\nThanks!'
+      body: 'woot!'
     }).then(function(d){
       UserNag.ticketsNagged.push(ticketId);
     }, function(e){
@@ -111,6 +111,7 @@ $('document').ready(function() {
     UserNag.user = envData['user']['id'];
 
     if(!UserNag.ticketPlacement) {
+      $('#site').val(UserNag.site);
       // Only request all nags if we're not on a specific ticket
       $.getJSON('/nag_history', {site: UserNag.site}, UserNag.loadHistory);
       $('#send_nags').on('click', window.UserNag.nag);
