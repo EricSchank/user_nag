@@ -53,9 +53,14 @@ window.UserNag = {
   },
   nagTicket: function(ticketId){
     var card = UserNag.card;
+    if(!UserNag.nagText){
+      Materialize.toast('Unable to load nag text; please try again later.', 3000);
+      return false;
+    }
+
     return card.services('helpdesk').request('comment:create', ticketId, {
       public: true,
-      body: 'Just a quick reminder that we need a little more info from you on this issue.\nWhen you get a chance, please give us an update so we can continue to help with this issue.\nThanks!'
+      body: UserNag.nagText
     }).then(function(d){
       UserNag.ticketsNagged.push(ticketId);
     }, function(e){
@@ -92,6 +97,18 @@ window.UserNag = {
     $hist.find('.tooltipped').tooltip({delay: 40});
     UserNag.nameSenders($hist, senders);
   },
+  getNagText: function(){
+    $.getJSON('/nag_text.json', {site: UserNag.site}, UserNag.loadNagText);
+  },
+  loadNagText: function(data){
+    var txt = data['text'];
+    if(!txt){
+      Materialize.toast('Unable to load nag text; please try again later.', 3000);
+      return;
+    }
+    UserNag.nagText = txt;
+    $('#nag_text').val(txt);
+  },
   nameSenders: function($hist, senders){
     var card = UserNag.card;
     for(var userId in senders) {
@@ -110,10 +127,16 @@ $('document').ready(function() {
     UserNag.site = envData['app_host']['auid'];
     UserNag.user = envData['user']['id'];
 
+    UserNag.getNagText();
+
     if(!UserNag.ticketPlacement) {
+      $('#site').val(UserNag.site);
       // Only request all nags if we're not on a specific ticket
       $.getJSON('/nag_history', {site: UserNag.site}, UserNag.loadHistory);
       $('#send_nags').on('click', window.UserNag.nag);
+      $('#nag_text_form').on('ajax:success', function(e, data, status, xhr) {
+        UserNag.loadNagText(data);
+      });
     }
   });
 

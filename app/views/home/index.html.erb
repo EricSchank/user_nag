@@ -15,29 +15,25 @@
       <div class="collapsible-header"><i class="material-icons">chat</i>Nag Text</div>
       <div class="collapsible-body">
         <p>Specify the reminder text we should use to nag your users.</p>
-        <p class="input-field">
-          <textarea id="nag_text" readonly class="materialize-textarea">Just a quick reminder that we need a little more info from you on this issue.&#13;&#10;When you get a chance, please give us an update so we can continue to help with this issue.&#13;&#10;Thanks!</textarea>
-          <label for="nag_text">Nag Message</label>
-        </p>
-        <p>Edit ability is coming soon...</p>
+        <%= form_tag nag_text_path, {method: :put, remote: true, id: "nag_text_form"} do %>
+          <%= hidden_field_tag :site, ''%>
+          <p class="input-field">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="nag_text" name="nag_text" class="materialize-textarea"><%= @nag_text %></textarea>
+            <label for="nag_text">Nag Message</label>
+          </p>
+          <p class="card-action">
+            <button id="change_text" class="btn waves-effect waves-light" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+          </p>
+        <% end %>
       </div>
     </li>
     <li class="nag-history">
       <div class="collapsible-header"><i class="material-icons">done_all</i>Nag History</div>
       <div class="collapsible-body">
-        <table class="bordered highlight">
-          <thead>
-            <tr>
-              <td>Time</td>
-              <td class="ticket-id">Ticket</td>
-              <td>Status</td>
-              <td>Sender</td>
-              <td>Nag Group</td>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+        <%= render partial: 'home/nag_history' %>
       </div>
     </li>
     <li>
