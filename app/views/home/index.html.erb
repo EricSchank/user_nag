@@ -15,11 +15,11 @@
       <div class="collapsible-header"><i class="material-icons">chat</i>Nag Text</div>
       <div class="collapsible-body">
         <p>Specify the reminder text we should use to nag your users.</p>
-        <%= form_tag '/nag_text', {method: :put, remote: true} do %>
+        <%= form_tag nag_text_path, {method: :put, remote: true, id: "nag_text_form"} do %>
           <%= hidden_field_tag :site, ''%>
           <p class="input-field">
             <i class="material-icons prefix">mode_edit</i>
-            <textarea id="nag_text" class="materialize-textarea"><%= @nag_text %></textarea>
+            <textarea id="nag_text" name="nag_text" class="materialize-textarea"><%= @nag_text %></textarea>
             <label for="nag_text">Nag Message</label>
           </p>
           <p class="card-action">

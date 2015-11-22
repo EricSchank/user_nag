@@ -1,17 +1,17 @@
 class NagTextsController < ApplicationController
   before_filter :load_site
+  before_filter :load_text, only: :show
 
   def update
-    Rails.logger.error "\nPAR: #{params.inspect}\n"
     text = params[:nag_text]
     head(400) and return unless text
-    cfg = @site.site_config.find_or_create
+    cfg = @site.site_config || @site.create_site_config
     cfg.nag = text
     cfg.save!
-    head(200)
+    render json: {text: text}
   end
 
-  def created
+  def show
+    render json: {text: @nag_text}
   end
-
 end
