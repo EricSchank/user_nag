@@ -35,21 +35,30 @@ window.UserNag = {
     });
   },
   nagAll: function(){
+    UserNag.nagPageOfTickets(1).then(function(){
+      Materialize.toast('' + UserNag.ticketsNagged.length + ' tickets successfully nagged.', 4500);
+      UserNag.log(false);
+    });
+  },
+  nagPageOfTickets: function(curPage){
     var card = UserNag.card;
-    card.services('helpdesk').request('tickets', {status: 'open'}).then(function(t){
-      var ticketList = t['tickets'];
+    var prom = card.services('helpdesk').request('tickets', {status: 'open', page: curPage, per_page: 100}).then(function(t){
       var promises = [];
+      curPage = t['meta']['current_page'];
+      pageCount = t['meta']['page_count'];
+      var ticketList = t['tickets'];
       for(var i=0; i < ticketList.length; i++){
         var tick = ticketList[i];
         if(tick['status'] == 'waiting') {
           promises.push(UserNag.nagTicket(tick['id']));
         }
       }
-      Promise.all(promises).then(function(){
-        Materialize.toast('' + UserNag.ticketsNagged.length + ' tickets successfully nagged.', 4500);
-        UserNag.log(false);
-      });
+      if(curPage < pageCount) {
+        promises.push(UserNag.nagPageOfTickets(curPage + 1));
+      }
+      return Promise.all(promises);
     });
+    return prom;
   },
   nagTicket: function(ticketId){
     var card = UserNag.card;
