@@ -13,7 +13,7 @@ class NagHistoryController < ApplicationController
   end
 
   def index
-    ret = @site.nag_history.order([:created_at, :action_id, :ticket_id])
+    ret = @site.nag_history.order(created_at: :desc, action_id: :desc, ticket_id: :asc)
     ret = ret.where(ticket_id: params[:ticket_id]) if params[:ticket_id]
     render json: ret
   end
