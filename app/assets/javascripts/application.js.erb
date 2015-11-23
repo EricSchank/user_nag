@@ -97,7 +97,8 @@ window.UserNag = {
     for(var i = 0; i < data.length; i++){
       var user = data[i]['nagging_user_id'];
       senders[user] = true;
-      $('<tr><td>'+data[i]['created_at']+
+      var created_at = data[i]['created_at'];
+      $('<tr><td>'+moment(created_at).format('lll')+
         '</td><td class="ticket-id">'+data[i]['ticket_id']+
         '</td><td><i class="material-icons tooltipped" data-position="left" data-tooltip="'+(data[i]['successful'] ? 'Successful Nag">done' : 'Unable to send Nag">report_problem')+
         '</i></td><td class="user" data-user-id="'+user+'">'+user+
