@@ -76,9 +76,19 @@ window.UserNag = {
       ftid: UserNag.failedNags,
       me: UserNag.user,
       ts: !!specificTicket
+    }, function(){
+      UserNag.getNagHistory(specificTicket);
     });
     UserNag.ticketsNagged = [];
     UserNag.failedNags = [];
+    // On success of history post, add wave to history title, add entries to list, and wave the new entries too
+  },
+  getNagHistory: function(ticketId){
+    var args = {site: UserNag.site};
+    if(ticketId){
+      args.ticket_id = ticketId;
+    }
+    $.getJSON('/nag_history', args, UserNag.loadHistory);
   },
   loadHistory: function(data){
     var $hist = $('.nag-history tbody');
@@ -132,7 +142,7 @@ $('document').ready(function() {
     if(!UserNag.ticketPlacement) {
       $('#site').val(UserNag.site);
       // Only request all nags if we're not on a specific ticket
-      $.getJSON('/nag_history', {site: UserNag.site}, UserNag.loadHistory);
+      UserNag.getNagHistory(false);
       $('#send_nags').on('click', window.UserNag.nag);
       $('#nag_text_form').on('ajax:success', function(e, data, status, xhr) {
         UserNag.loadNagText(data);
@@ -141,7 +151,7 @@ $('document').ready(function() {
   });
 
   card.services('helpdesk').on('showTicket', function(ticketId) {
-    $.getJSON('/nag_history', {site: UserNag.site, ticket_id: ticketId}, UserNag.loadHistory);
+    UserNag.getNagHistory(ticketId);
     $('#send_nag').on('click', ticketId, UserNag.nag);
   });
 });
