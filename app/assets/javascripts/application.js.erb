@@ -42,7 +42,7 @@ window.UserNag = {
   },
   nagPageOfTickets: function(curPage){
     var card = UserNag.card;
-    var prom = card.services('helpdesk').request('tickets', {status: 'open', page: curPage, per_page: 100}).then(function(t){
+    var prom = card.services('helpdesk').request('tickets', {status: UserNag.ticketFilter, page: curPage, per_page: 100}).then(function(t){
       var promises = [];
       curPage = t['meta']['current_page'];
       pageCount = t['meta']['page_count'];
@@ -143,6 +143,12 @@ $('document').ready(function() {
   UserNag.card = card;
   card.onActivate(function(envData) {
     UserNag.env = envData;
+    var oldVersionRE = /^7\.4\./;
+    if(!!(envData.app_host.version.match(oldVersionRE))){
+      UserNag.ticketFilter = 'open';
+    } else {
+      UserNag.ticketFilter = 'waiting';
+    }
     $('#auid').val(envData['app_host']['auid']);
     UserNag.site = envData['app_host']['auid'];
     UserNag.user = envData['user']['id'];
